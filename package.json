@@ -1,0 +1,27 @@
+{
+  "name": "media-manager",
+  "version": "1.0.0",
+  "description": "An easy to use modular media manager",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freund17/media-manager.git"
+  },
+  "keywords": [
+    "media",
+    "manager",
+    "tag"
+  ],
+  "author": "freund17",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freund17/media-manager/issues"
+  },
+  "homepage": "https://github.com/freund17/media-manager#readme"
+}
