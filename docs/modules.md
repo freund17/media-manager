@@ -2,7 +2,6 @@
 
 The Media-Manager only contains the core functionality and is not runnable by itself. It also needs a few modules to be useable:
 
-
 ## Store-Module
 
 Every Media-Manager instance has exactly one Store-Module.
@@ -11,32 +10,33 @@ It is responsible for persistent storage.
 It may implement access to SqLite / MongoDb / MySQL / Redis or something completely different.
 It could even be a multiplexer for multiple Store-Modules or a simple cache to put inbetween ones.
 
-
 ## Source-Module
 
-Every Media-Manager instance needs to have at least one Source-Module to be usefull.
+Every Media-Manager instance has exactly one Source-Module.
 It is responsible for delivering media-files to the Media-Manager.
 
 It emitts an event when new files become available / have changed / are no longer available.
 Files are passed on as stream-objects. Sources may be for example a local- / network-file or another server.
 The file may even be generated on the fly.
 
+It could also be a multiplexer for multiple Source-Modules.
 
-## Interface-Module
+## Interface-"Module"
 
-A Media-Manager instance may also have one or more Interface-Modules.
-By default, the media-files can only be accessed via the interface exposed by the Media-Manager instance.
-Interface-Modules offer an easy way to extend on this by also exposing this interface in different ways.
+The media-files can only be accessed via the interface exposed by the Media-Manager instance.
+
+But you may also build your own interfaces on top of that.
+These are not really "Modules" as they are completely seperate from the Media-Manager itself.
+But nevertheless they are listed here to get the idea across.
 
 An Interface-Module may implement a HTTP/S-api or tui for accessing the files.
 It may even be a proxy for other Interface-Modules to add authentication and access-restriction, for example.
 
-
-
-
 ## Module ideas
 
-### local-folder-source
+mmm = Media Manager Module
+
+### mmm-local-folder-source
 
 - allows linking to data in a local directory and its sub-directories
 - by default
@@ -52,19 +52,19 @@ It may even be a proxy for other Interface-Modules to add authentication and acc
         - remove tags form files
         - disable tag-inheritance for specific files or folders
 
-### cdn-source
+### mmm-cdn-source
 
 - allows linking to data from a content-delivery-network
 - supports 2 modes:
     1. All media must be added manually (link, title, description, tags)
-    2. Given a root url, a structure like the `local-folder-loader` is expected. In this case, a `meta.json` in every directory is required. Only files and directories mentioned in `meta.json` will be discovered.
+    1. Given a root url, a structure like the `local-folder-loader` is expected. In this case, a `meta.json` in every directory is required. Only files and directories mentioned in `meta.json` will be discovered.
 
-### web-dav-source
+### mmm-web-dav-source
 
 - allows linking to a web-dav source
 - Given a root url, a structure like the `local-folder-loader` is expected.
 
-### media-hub-source
+### mmm-media-hub-source
 
 - allows linking to another media-hub
 - if not forbidden by the other media hub
