@@ -1,13 +1,12 @@
 module.exports = class MediaManager {
     static defaultConfig = {
-        allowContains: true,
+        allowSubstringFilter: true,
         defaultLimit: 50
     }
 
     constructor(store, source, config) {
         this._store = store;
         this._source = source;
-
         this._config = { ...defaultConfig, ...config };
     }
 
@@ -33,10 +32,10 @@ module.exports = class MediaManager {
         // matches all media where the title contains "hi guys" and the description does not contain "epic"
         '*title~"hi guys"*description~epic!';
 
-        // TODO
-        if(this._config.allowContains) {
+        // matches all media where the title starts with "test" and ends with "blub"
+        '*title^test*title$blub';
 
-        }
+        // TODO
     }
 
     /**
@@ -74,6 +73,7 @@ module.exports = class MediaManager {
      * @param {string|Sort} sort sort-string or sort-object to be applied
      * @param {number} limit maximum number of returned results
      * @param {number} offset skip the first *offset* results
+     * @throws {SubstringFilterNotAllowedError}
      * @return {Array<string>}
      */
     find(filter, sort, limit, offset) {
@@ -96,6 +96,9 @@ module.exports = class MediaManager {
             sort = this.parseSort(sort);
         
         // TODO
+        if(this._config.allowSubstringFilter) {
+
+        }
     }
 
     /**
@@ -120,17 +123,18 @@ module.exports = class MediaManager {
         return Promise.resolve({
             id: mediumId,
             title: 'test',
-            description: 'toll\n#myTag#myTagB:withMeta',
-            tags: [
-                {
-                    name: 'myTag',
-                    meta: null
-                },
-                {
-                    name: 'myTagB',
-                    meta: 'withMeta'
-                }
-            ]
+            description: 'Und die Insel war so #cool, sowas habt ihr noch nicht gesehen!\n\n#myTag#myTagB:withMeta',
+            tags: {
+                'cool': null,
+                'myTag': null,
+                'myTagB': 'withMeta'
+            },
+            statistics: {
+                usesLastDay: 1,
+                usesLastWeek: 12,
+                usesLastMonth: 35,
+                usesTotal: 195
+            }
         });
     }
 };
