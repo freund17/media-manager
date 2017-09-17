@@ -68,7 +68,7 @@ As tags are the only means to group and order files in a semantical manner, they
   - a tag must start with the hash character (`#`) followed by the tagname
   - after the tagname a colon (`:`) followed by the metadata may follow
 
-  - RegEx: `#([^\W_]\w*)(?::(?:(\d+(?:\.\d+)?)|"((?:(?=(\\?))\4.)*?)"|(.+?)))?(?=\s|#|$)`
+  - RegEx: `#([^\W_]\w*)(?::(?:(\d+(?:\.\d+)?)|"((?:(?=(\\?))\4.)*?)"|([^\s#]+)))?`
     - group #1 contains the tagname
     - group #2 contains the metainfo, if it is a number
     - group #3 contains the metainfo, if doublequotes were used
