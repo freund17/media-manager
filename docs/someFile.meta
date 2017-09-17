@@ -1,0 +1,11 @@
+This is a Title
+===============
+
+The first line in this file is the title. Following whitespace characters (`\s`) and equal signs (`=`) are ignored.
+The remainder of the file is considered the description.
+The description will be stripped of any preceding or following whitespaces. Nevertheless a meta-file should end with an empty line.
+The description contains the #hashtags, which help to categorize the content.
+Hashtags are case-insensitive and may occur anywhere in the description.
+The typical "meta"-information-hashtags may be added as a seperate paragraph at the end.
+
+#series:"Attack On Titan"#season:2#episode:12#fullepisode#anime#cool
