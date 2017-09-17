@@ -23,11 +23,84 @@ module.exports = class MediaManager {
         // or
         // the medium has the flags "cool" and "new"
         '#series="Attack On Titan"#season>3#episode#highlight!|#cool#new';
+        const result = [
+            false,
+            [
+                true,
+                {
+                    type: 2,
+                    key: 'series',
+                    value: 'Attack On Titan'
+                },
+                {
+                    type: 2,
+                    key: 'season',
+                    value: { $gt: 3 }
+                },
+                {
+                    type: 2,
+                    key: 'episode',
+                    value: true
+                },
+                {
+                    type: 2,
+                    key: 'highlight',
+                    value: true
+                }
+            ]
+            [
+                true,
+                {
+                    type: 2,
+                    key: 'cool',
+                    value: true
+                },
+                {
+                    type: 2,
+                    key: 'new',
+                    value: true
+                }
+            ]
+        ];
 
         // matches all media with the properties "image" and "width"
         // and either the tag "old" or the tags "new" but not "cool"
         // where the "width" is smaller or equal "1920"
         '(#cool!#new|#old)*image*width<=1920';
+        const result = [
+            true,
+            [
+                false,
+                [
+                    true,
+                    {
+                        type: 2,
+                        key: 'cool',
+                        value: false
+                    },
+                    {
+                        type: 2,
+                        key: 'new',
+                        value: true
+                    }
+                ],
+                {
+                    type: 2,
+                    key: 'old',
+                    value: true
+                }
+            ],
+            {
+                type: 1,
+                key: 'image',
+                value: true
+            },
+            {
+                type: 1,
+                key: 'width',
+                value: { $lte: 1920 }
+            }
+        ];
 
         // matches all media where the title contains "hi guys" and the description does not contain "epic"
         '*title~"hi guys"*description~epic!';
@@ -48,6 +121,13 @@ module.exports = class MediaManager {
 
         // sorts ascending by the meta-info of "cool" (lexicographically)
         '#cool';
+        const result = [
+            {
+                key: '#cool',
+                order: 'asc',
+                numerically: false
+            }
+        ];
 
         // sorts descending by the meta-info of "cool" (lexicographically)
         '#cool!';
@@ -62,6 +142,23 @@ module.exports = class MediaManager {
         // then ascending by the meta-info of "season" (numerically)
         // then ascending by the meta-info of "episode" (numerically)
         '#series#season<#episode<';
+        const result = [
+            {
+                key: '#series',
+                order: 'asc',
+                numerically: false
+            },
+            {
+                key: '#season',
+                order: 'asc',
+                numerically: true
+            },
+            {
+                key: '#episode',
+                order: 'asc',
+                numerically: true
+            }
+        ];
 
         // TODO
     }
