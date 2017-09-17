@@ -41,6 +41,7 @@ The Media-Manager should support the following features:
       - `tagA>5 & tagA<10`: meta-value of `tagA` is between `5` and `10`
       - `tagA>=5 & tagA<=10`: meta-value of `tagA` is between `5` and `10` or `5` or `10`
       - `tagA=5 & tagB!=10`: meta-value of `tagA` is between `5` and meta-value of `tagB` is not `10`
+      - `tagA=# & tagB!=#`: meta-value of `tagA` is a number and meta-value of `tagB` is not a number
       - `tagA~"totally awesome" & tagA!~boring`: meta-value of `tagA` contains `totally awesome` and does not contain `boring`
 
   - full query example:
